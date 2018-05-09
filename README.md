@@ -31,5 +31,8 @@
 ## 注意
 &emsp;&emsp;如不做特殊说明，则默认答案通过了LeetCode的测试。
 
+## Other
+&emsp;&emsp;立个Flag，每个工作日添加5道题目，每个星期给出5道题目的答案。
+
 ## 开源协议
 &emsp;&emsp;本项目采用MIT协议。
