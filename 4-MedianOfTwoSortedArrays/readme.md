@@ -28,10 +28,10 @@
     The median is (2 + 3)/2 = 2.5
 ```
 
-### Difficulty
+## Difficulty
 
 &emsp;&emsp;Hard
 
-### Other
+## Other
 
 &emsp;&emsp;todo，添加解题思路。

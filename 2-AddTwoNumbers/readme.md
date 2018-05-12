@@ -17,10 +17,10 @@ in **reverse** order and each of their nodes contain a single digit. Add the two
     Explanation: 342 + 465 = 807.
 ```
 
-### Difficulty
+## Difficulty
 
 &emsp;&emsp;Medium
 
-### Other
+## Other
 
 &emsp;&emsp;todo，添加解题思路。

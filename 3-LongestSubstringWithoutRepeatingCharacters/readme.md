@@ -15,10 +15,10 @@ Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer 
 subsequence and not a substring.
 ```
 
-### Difficulty
+## Difficulty
 
 &emsp;&emsp;Medium
 
-### Other
+## Other
 
 &emsp;&emsp;todo，添加解题思路。

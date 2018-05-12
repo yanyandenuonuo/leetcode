@@ -16,10 +16,10 @@
     return [0, 1].
 ```
 
-### Difficulty
+## Difficulty
 
 &emsp;&emsp;Easy
 
-### Other
+## Other
 
 &emsp;&emsp;todo，添加解题思路。

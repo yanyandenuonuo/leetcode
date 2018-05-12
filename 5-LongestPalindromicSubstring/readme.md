@@ -25,10 +25,10 @@ length of **s** is 1000.
     Output: "bb"
 ```
 
-### Difficulty
+## Difficulty
 
 &emsp;&emsp;Medium
 
-### Other
+## Other
 
 &emsp;&emsp;todo，添加解题思路。

@@ -44,10 +44,10 @@ want to display this pattern in a fixed font for better legibility)
     P     I
 ```
 
-### Difficulty
+## Difficulty
 
 &emsp;&emsp;Medium
 
-### Other
+## Other
 
 &emsp;&emsp;todo，添加解题思路。

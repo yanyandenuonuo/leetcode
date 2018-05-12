@@ -13,7 +13,7 @@ for '**\.**' and '__\*__'.
 
 &emsp;&emsp;The matching should cover the **entire** input string (not partial).
 
-### Note
+## Note
 
 - **s** could be empty and contains only lowercase letters **a-z**.
 - **p** could be empty and contains only lowercase letters **a-z**, and characters like **\.** or __\*__.
@@ -89,10 +89,10 @@ for '**\.**' and '__\*__'.
     Output: false
 ```
 
-### Difficulty
+## Difficulty
 
 &emsp;&emsp;Hard
 
-### Other
+## Other
 
 &emsp;&emsp;todo，添加解题思路。
