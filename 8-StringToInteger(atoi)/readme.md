@@ -20,7 +20,7 @@ sequence exists because either str is empty or it contains only whitespace chara
 
 - Only the space character ' ' is considered as whitespace character.
 - Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: 
-[−2^31,  2^31 − 1]. If the numerical value is out of the range of representable values, INT_MAX (2^31 − 1) or 
+\[−2^31,  2^31 − 1\]. If the numerical value is out of the range of representable values, INT_MAX (2^31 − 1) or 
 INT_MIN (−2^31) is returned.
 
 ## Example:
