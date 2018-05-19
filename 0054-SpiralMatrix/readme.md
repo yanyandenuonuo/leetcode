@@ -1,4 +1,4 @@
-# Maximum Subarray
+# Spiral Matrix
 
 ## Description
 
