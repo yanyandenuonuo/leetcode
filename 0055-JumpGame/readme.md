@@ -1,4 +1,4 @@
-# Maximum Subarray
+# Jump Game
 
 ## Description
 
