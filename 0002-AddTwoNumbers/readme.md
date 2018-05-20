@@ -21,6 +21,14 @@ in **reverse** order and each of their nodes contain a single digit. Add the two
 
 &emsp;&emsp;Medium
 
-## Other
+## Solution
 
-&emsp;&emsp;todo，添加解题思路。
+### eg1
+
+&emsp;&emsp;按位进行处理
+
+## 测试
+
+- Java版本通过LeetCode官方测试
+
+## Other
