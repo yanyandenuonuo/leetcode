@@ -26,6 +26,14 @@ in **reverse** order and each of their nodes contain a single digit. Add the two
 ### eg1
 
 &emsp;&emsp;按位进行处理
+Complexity Analysis
+
+#### Complexity Analysis
+
+- Time complexity : O\(max\(m, n\)\). Assume that mm and nn represents the length of l1 and l2 respectively, the 
+algorithm above iterates at most max\(m,n\) times.
+
+- Space complexity : O\(max\(m, n\)\). The length of the new list is at most max\(m, n\) + 1.
 
 ## 测试
 
