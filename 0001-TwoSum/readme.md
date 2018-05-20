@@ -38,5 +38,10 @@
 
 &emsp;&emsp;**Note:** 注意返回的key和index的顺序。
 
+## 测试
+
+- PHP版本通过自测
+- Java版本通过LeetCode官方测试
+
 ## Other
 
