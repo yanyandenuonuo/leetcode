@@ -26,6 +26,12 @@
 
 &emsp;&emsp;两层遍历，复杂度为O\(n^2\)。
 
+#### Complexity Analysis
+- Time complexity : O\(n^2\). For each element, we try to find its complement by looping through the rest of array 
+which takes O\(n\) time. Therefore, the time complexity is O\(n^2\)
+
+- Space complexity : O\(1\).
+
 ### eg2
 
 &emsp;&emsp;一层遍历，时间复杂度为O\(n\)。
@@ -37,6 +43,14 @@
 遍历，否则返回\[key\, index\]即可。
 
 &emsp;&emsp;**Note:** 注意返回的key和index的顺序。
+
+#### Complexity Analysis:
+
+- Time complexity : O\(n\). We traverse the list containing n elements only once. Each look up in the table costs only 
+O\(1\) time.
+
+- Space complexity : O\(n\). The extra space required depends on the number of items stored in the hash table, which 
+stores at most n elements.
 
 ## 测试
 
