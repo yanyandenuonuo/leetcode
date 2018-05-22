@@ -1,4 +1,4 @@
-# Unique Paths II
+# Minimum Path Sum
 
 ## Description
 

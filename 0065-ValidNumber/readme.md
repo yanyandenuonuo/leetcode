@@ -1,4 +1,4 @@
-# Unique Paths II
+# Valid Number
 
 ## Description
 
