@@ -1,4 +1,4 @@
-# Remove Duplicates from Sorted List
+# Maximal Rectangle
 
 ## Description
 
