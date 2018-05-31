@@ -8,9 +8,6 @@
 
 &emsp;&emsp;You may assume that duplicates do not exist in the tree.
 
-&emsp;&emsp;**Note:** A leaf is a node with no children.
-
-
 ## Example
 
 ### eg1
