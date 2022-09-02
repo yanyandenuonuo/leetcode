@@ -1,0 +1,67 @@
+/*
+ * @lc app=leetcode id=106 lang=golang
+ *
+ * [106] Construct Binary Tree from Inorder and Postorder Traversal
+ *
+ * https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/
+ *
+ * algorithms
+ * Medium (48.11%)
+ * Likes:    2110
+ * Dislikes: 39
+ * Total Accepted:    258.1K
+ * Total Submissions: 536.3K
+ * Testcase Example:  '[9,3,15,20,7]\n[9,15,7,20,3]'
+ *
+ * Given inorder and postorder traversal of a tree, construct the binary tree.
+ * 
+ * Note:
+ * You may assume that duplicates do not exist in the tree.
+ * 
+ * For example, given
+ * 
+ * 
+ * inorder = [9,3,15,20,7]
+ * postorder = [9,15,7,20,3]
+ * 
+ * Return the following binary tree:
+ * 
+ * 
+ * ⁠   3
+ * ⁠  / \
+ * ⁠ 9  20
+ * ⁠   /  \
+ * ⁠  15   7
+ * 
+ * 
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func buildTree(inorder []int, postorder []int) *TreeNode {
+    if len(inorder) == 0 {
+		return nil
+	}
+	root := new(TreeNode)
+	root.Val = postorder[len(postorder)-1]
+	idx := 0 
+	for {
+		if inorder[idx] == root.Val {
+			break
+		}
+		idx += 1
+	}
+
+	root.Left = buildTree(inorder[:idx], postorder[:idx])
+	root.Right = buildTree(inorder[idx+1:], postorder[idx:len(postorder)-1])
+	return root
+}
+// @lc code=end
+
