@@ -8,8 +8,8 @@
 - PHP 7.1.7
 - Python 3.6.2
 - Java 1.8.0
-- Go 1.9.2
-- NodeJs 6.11.2
+- Go 1.19
+- NodeJs 16.14.0(NPM 8.5.4)
 
 ## 运行指令
 

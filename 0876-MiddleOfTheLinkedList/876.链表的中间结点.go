@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode id=876 lang=golang
+ * @lc app=leetcode.cn id=876 lang=golang
  *
- * [876] Middle of the Linked List
+ * [876] 链表的中间结点
  */
 
 // @lc code=start
@@ -13,7 +13,7 @@
  * }
  */
 func middleNode(head *ListNode) *ListNode {
-    slowNode := head
+	slowNode := head
 	fastNode := head
 	for {
 		if fastNode == nil || fastNode.Next == nil {
@@ -26,5 +26,6 @@ func middleNode(head *ListNode) *ListNode {
 		}
 	}
 }
+
 // @lc code=end
 
