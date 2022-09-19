@@ -9,7 +9,7 @@ func search(nums []int, target int) int {
 	rightIdx := len(nums) - 1
 
 	for leftIdx := 0; leftIdx <= rightIdx; {
-		midIdx := leftIdx + (rightIdx - leftIdx) / 2
+		midIdx := leftIdx + (rightIdx-leftIdx)/2
 		if nums[midIdx] == target {
 			return midIdx
 		} else if nums[midIdx] > target {
@@ -20,5 +20,6 @@ func search(nums []int, target int) int {
 	}
 	return -1
 }
+
 // @lc code=end
 
