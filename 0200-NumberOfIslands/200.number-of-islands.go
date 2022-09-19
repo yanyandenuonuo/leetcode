@@ -59,7 +59,44 @@
 
 // @lc code=start
 func numIslands(grid [][]byte) int {
-    
+	if len(grid) == 0 {
+		return 0
+	}
+
+	res := 0
+	for row := 0; row < len(grid); row += 1 {
+		for column := 0; column < len(grid[row]); column += 1 {
+			if grid[row][column] == '1' {
+				res += 1
+				dfs(grid, row, column)
+			}
+		}
+	}
+
+	return res
 }
+
+func dfs(grid [][]byte, row int, column int) {
+	if row < 0 || row >= len(grid) || column < 0 || column >= len(grid[0]) {
+		return
+	}
+	if grid[row][column] != '1' {
+		return
+	}
+	grid[row][column] = '2'
+
+	// up
+	dfs(grid, row-1, column)
+
+	// down
+	dfs(grid, row+1, column)
+
+	// left
+	dfs(grid, row, column-1)
+
+	// right
+	dfs(grid, row, column+1)
+}
+
 // @lc code=end
 
