@@ -13,8 +13,7 @@
  * }
  */
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
-	slowNode := head
-	fastNode := head
+	slowNode, fastNode := head, head
 
 	// fast run n step
 	for idx := 0; idx < n; idx += 1 {
@@ -25,20 +24,17 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 
 	for {
 		if fastNode == nil {
-			// fast is nil
+			// link is shorter than n
 			return head.Next
 		} else if fastNode.Next == nil {
 			// fast is last
-			if slowNode.Next != nil {
-				slowNode.Next = slowNode.Next.Next
-			} else {
-				return nil
-			}
+			slowNode.Next = slowNode.Next.Next
 			return head
 		}
 		slowNode = slowNode.Next
 		fastNode = fastNode.Next
 	}
 }
+
 // @lc code=end
 
