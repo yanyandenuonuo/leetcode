@@ -7,8 +7,8 @@
 // @lc code=start
 func longestCommonSubsequence(text1 string, text2 string) int {
 	// 转化为二维数组进行比较, 如下图
-	// \	''	a	b	c	d	e
-	// ''	0	0	0	0	0	0
+	// \	-	a	b	c	d	e
+	// -	0	0	0	0	0	0
 	// a	0	1	1	1	1	1
 	// c	0	1	1	2	2	2
 	// f	0	1	1	2	2	2
