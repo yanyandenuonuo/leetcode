@@ -13,17 +13,36 @@
  * }
  */
 func reverseList(head *ListNode) *ListNode {
-	var newHead *ListNode
-	pointNode := head
-	for pointNode != nil {
-		newHead = &ListNode{
-			Val:  pointNode.Val,
-			Next: newHead,
-		}
+	// solution1: 构建新链表
+	// if head == nil {
+	// 	return nil
+	// }
+	// var newHead *ListNode
+	// pointNode := head
+	// for pointNode != nil {
+	// 	newHead = &ListNode{
+	// 		Val:  pointNode.Val,
+	// 		Next: newHead,
+	// 	}
 
-		pointNode = pointNode.Next
+	// 	pointNode = pointNode.Next
+	// }
+	// return newHead
+
+	// solution2: 原地更改指向
+	if head == nil {
+		return nil
 	}
-	return newHead
+	point := head.Next
+	head.Next = nil
+
+	for point != nil {
+		nextPoint := point.Next
+		point.Next = head
+		head = point
+		point = nextPoint
+	}
+	return head
 }
 
 // @lc code=end
