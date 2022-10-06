@@ -7,10 +7,8 @@
 // @lc code=start
 func search(nums []int, target int) int {
 	targetIdx := -1
-	leftIdx := 0
-	rightIdx := len(nums) - 1
 
-	for leftIdx <= rightIdx {
+	for leftIdx, rightIdx := 0, len(nums)-1; leftIdx <= rightIdx; {
 		midIdx := leftIdx + (rightIdx-leftIdx)/2
 		if nums[midIdx] == target {
 			return midIdx
