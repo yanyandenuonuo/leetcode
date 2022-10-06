@@ -5,13 +5,12 @@
  */
 
 // @lc code=start
-func reverseString(s []byte)  {
-    rightIdx := len(s) - 1
-	for leftIdx := 0; leftIdx < rightIdx; {
+func reverseString(s []byte) {
+	for leftIdx, rightIdx := 0, len(s)-1; leftIdx < rightIdx; leftIdx += 1 {
 		s[leftIdx], s[rightIdx] = s[rightIdx], s[leftIdx]
-		leftIdx += 1
 		rightIdx -= 1
 	}
 }
+
 // @lc code=end
 
