@@ -7,6 +7,9 @@
 // @lc code=start
 func spiralOrder(matrix [][]int) []int {
 	// solution1: 模拟四向
+	if len(matrix) == 0 {
+		return []int{}
+	}
 	total := len(matrix) * len(matrix[0])
 	res := make([]int, 0, total)
 	minRow, maxRow, minColumn, maxColumn := 0, len(matrix)-1, 0, len(matrix[0])-1
@@ -44,6 +47,9 @@ func spiralOrder(matrix [][]int) []int {
 
 	// solution2: 关注点的边界，存在bad case需要特殊处理，如只有一行时上下顶点重合，只有1列时左右顶点重合
 	/**
+	if len(matrix) == 0 {
+		return []int{}
+	}
 	total := len(matrix) * len(matrix[0])
 	res := make([]int, 0, total)
 	minRow, maxRow, minColumn, maxColumn := 0, len(matrix)-1, 0, len(matrix[0])-1
