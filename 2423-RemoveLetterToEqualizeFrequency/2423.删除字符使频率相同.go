@@ -1,3 +1,10 @@
+/*
+ * @lc app=leetcode.cn id=2423 lang=golang
+ *
+ * [2423] 删除字符使频率相同
+ */
+
+// @lc code=start
 func equalFrequency(word string) bool {
 	if len(word) == 0 {
 		return true
@@ -34,3 +41,6 @@ func equalFrequency(word string) bool {
 
 	return false
 }
+
+// @lc code=end
+
