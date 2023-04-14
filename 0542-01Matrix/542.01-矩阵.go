@@ -55,8 +55,6 @@ func updateMatrix(mat [][]int) [][]int {
 			matrix[row][column+1] = matrix[row][column] + 1
 			queueElement = append(queueElement, []int{row, column + 1})
 		}
-
-		// fmt.Printf("row: %v, column: %v, matrix: %v \n", row, column, matrix)
 	}
 
 	return matrix
