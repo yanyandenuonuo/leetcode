@@ -9,16 +9,23 @@ func permute(nums []int) [][]int {
 	return backTracker(nums, len(nums))
 }
 
-func backTracker(nums []int, k int) [][]int {
+func backTracker(nums []int, length int) [][]int {
+	if length == 0 {
+		return [][]int{}
+	} else if length == 1 {
+		return [][]int{
+			{nums[0]},
+		}
+	}
+
 	resultList := make([][]int, 0)
 	for idx := range nums {
-		if k == 1 {
-			resultList = append(resultList, []int{nums[idx]})
-		} else {
-			subResultList := backTracker(append(nums[:idx], nums[idx+1:]...), k-1)
-			for resultIdx := range subResultList {
-				resultList = append(resultList, append([]int{nums[idx]}, subResultList[resultIdx]...))
-			}
+		subNums := make([]int, length-1)
+		copy(subNums, nums[:idx])
+		copy(subNums[idx:], nums[idx+1:])
+		subResultList := backTracker(subNums, length-1)
+		for _, subResult := range subResultList {
+			resultList = append(resultList, append([]int{nums[idx]}, subResult...))
 		}
 	}
 
