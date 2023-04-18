@@ -20,13 +20,14 @@ func isValidBST(root *TreeNode) bool {
 	//				  /   \
 	//				3	   11
 	//
-	// solution1: 如下checkTreeNode实现
+
+	// solution1: 递归如下checkTreeNode实现
 	// check 5 math.min math.max
 	// check 1 math.min 5 && check 8 5 math.max
 	// check 3 5 5 && check 11 8 math.max
+	return checkTreeNode(root, math.MinInt64, math.MaxInt64)
 
 	// solution2: 中序遍历，如为二叉搜索树则得到的数组一定为升序。[1, 5, 3, 8, 11]
-	return checkTreeNode(root, math.MinInt64, math.MaxInt64)
 }
 
 func checkTreeNode(root *TreeNode, minValue, maxValue int) bool {
