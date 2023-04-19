@@ -7,6 +7,7 @@
 // @lc code=start
 func spiralOrder(matrix [][]int) []int {
 	// solution1: 模拟四向
+	/**
 	if len(matrix) == 0 {
 		return []int{}
 	}
@@ -44,8 +45,44 @@ func spiralOrder(matrix [][]int) []int {
 	}
 
 	return res
+	*/
 
-	// solution2: 关注点的边界，存在bad case需要特殊处理，如只有一行时上下顶点重合，只有1列时左右顶点重合
+	// solution2: 模拟，使用路径记忆，遇边界则换向
+	if len(matrix) == 0 {
+		return []int{}
+	}
+	memoryMap := make([][]bool, len(matrix))
+	for idx := 0; idx < len(memoryMap); idx += 1 {
+		memoryMap[idx] = make([]bool, len(matrix[0]))
+	}
+
+	directions := [][]int{
+		{0, 1},
+		{1, 0},
+		{0, -1},
+		{-1, 0},
+	}
+
+	total := len(matrix) * len(matrix[0])
+	res := make([]int, 0, total)
+
+	for rowIdx, columnIdx, directionIdx := 0, 0, 0; total > 0; total -= 1 {
+		res = append(res, matrix[rowIdx][columnIdx])
+		memoryMap[rowIdx][columnIdx] = true
+
+		nextRowIdx := rowIdx + directions[directionIdx][0]
+		nextColumnIdx := columnIdx + directions[directionIdx][1]
+		if nextRowIdx < 0 || nextRowIdx >= len(matrix) || nextColumnIdx < 0 ||
+			nextColumnIdx >= len(matrix[0]) || memoryMap[nextRowIdx][nextColumnIdx] {
+			directionIdx = (directionIdx + 1) % 4
+		}
+		rowIdx = rowIdx + directions[directionIdx][0]
+		columnIdx = columnIdx + directions[directionIdx][1]
+	}
+
+	return res
+
+	// solution3: 关注点的边界，存在bad case需要特殊处理，如只有一行时上下顶点重合，只有1列时左右顶点重合
 	/**
 	if len(matrix) == 0 {
 		return []int{}

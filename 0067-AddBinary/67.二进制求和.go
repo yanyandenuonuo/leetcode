@@ -9,37 +9,26 @@ func addBinary(a string, b string) string {
 	if len(a) > len(b) {
 		a, b = b, a
 	}
-	minLength := len(a)
 
 	carry := uint8(0)
 	res := ""
-	offset := 0
-	for ; offset < minLength; offset += 1 {
-		aBit := a[len(a)-1-offset] - '0'
-		bBit := b[len(b)-1-offset] - '0'
-		bitNum := aBit + bBit + carry
-		res = string('0'+bitNum&0x01) + res
-		if bitNum&0x02 == 0x02 {
-			carry = uint8(1)
-		} else {
-			carry = uint8(0)
-		}
-	}
 
-	for ; carry == 1 && offset < len(b); offset += 1 {
-		bBit := b[len(b)-1-offset] - '0'
-		bitNum := bBit + carry
-		res = string('0'+bitNum&0x01) + res
-		if bitNum&0x02 == 0x02 {
-			carry = uint8(1)
-		} else {
-			carry = uint8(0)
+	for offset := 0; offset < len(b); offset += 1 {
+		aBit := uint8(0)
+		if offset < len(a) {
+			aBit = a[len(a)-1-offset] - '0'
 		}
-	}
 
-	// 补齐b字符高位
-	if offset != len(b) {
-		res = b[0:len(b)-offset] + res
+		bBit := b[len(b)-1-offset] - '0'
+
+		bitSum := aBit + bBit + carry
+
+		res = string('0'+bitSum&0x01) + res
+		if bitSum&0x02 == 0x02 {
+			carry = 1
+		} else {
+			carry = 0
+		}
 	}
 
 	// 补进位
