@@ -15,92 +15,122 @@
  *
  * Given a string s and a non-empty string p, find all the start indices of p's
  * anagrams in s.
- * 
+ *
  * Strings consists of lowercase English letters only and the length of both
  * strings s and p will not be larger than 20,100.
- * 
+ *
  * The order of output does not matter.
- * 
+ *
  * Example 1:
- * 
+ *
  * Input:
  * s: "cbaebabacd" p: "abc"
- * 
+ *
  * Output:
  * [0, 6]
- * 
+ *
  * Explanation:
  * The substring with start index = 0 is "cba", which is an anagram of "abc".
  * The substring with start index = 6 is "bac", which is an anagram of
  * "abc".
- * 
- * 
- * 
+ *
+ *
+ *
  * Example 2:
- * 
+ *
  * Input:
  * s: "abab" p: "ab"
- * 
+ *
  * Output:
  * [0, 1, 2]
- * 
+ *
  * Explanation:
  * The substring with start index = 0 is "ab", which is an anagram of "ab".
  * The substring with start index = 1 is "ba", which is an anagram of "ab".
  * The substring with start index = 2 is "ab", which is an anagram of "ab".
- * 
- * 
+ *
+ *
  */
 
 // @lc code=start
 func findAnagrams(s string, p string) []int {
-    targetMap := make(map[string]int, len(p))
-	countMap := make(map[string]int, len(p))
+	// solution1: use mapCount check equal
+	/**
+	if len(s) < len(p) {
+		return []int{}
+	}
+	targetMap := make(map[byte]int, len(p))
+	countMap := make(map[byte]int, len(p))
 
-	for idx := 0; idx < len(p); idx += 1 {
-		currentStr := p[idx:idx+1]
-		if _, isExist := targetMap[currentStr]; !isExist {
-			targetMap[currentStr]  = 0 
-		}
-		targetMap[currentStr] += 1
+	for idx := range p {
+		targetMap[p[idx]] += 1
 	}
 
-	isMatchCount := 0
+	matchCharCount := 0
 
 	res := make([]int, 0, len(s))
 
 	for left, right := 0, 0; right < len(s); right += 1 {
-		currentStr := s[right:right+1]
+		currentChar := s[right]
 
-		if _, isExist := targetMap[currentStr]; !isExist {
+		if _, isExist := targetMap[currentChar]; !isExist {
 			continue
 		}
 
-		if _, isExist := countMap[currentStr]; !isExist {
-			countMap[currentStr] = 0
-		}
-		countMap[currentStr] += 1
+		countMap[currentChar] += 1
 
-		if countMap[currentStr] == targetMap[currentStr] {
-			isMatchCount += 1
+		if countMap[currentChar] == targetMap[currentChar] {
+			matchCharCount += 1
 		}
 
-
-		for isMatchCount == len(targetMap) {
-			currentMatch := s[left:right+1]
+		for matchCharCount == len(targetMap) {
+			currentMatch := s[left : right+1]
 			if len(currentMatch) == len(p) {
 				res = append(res, left)
 			}
-			currentStr := s[left:left+1]
-			if _, isExist := targetMap[currentStr]; isExist {
-				countMap[currentStr] -= 1
 
-				if countMap[currentStr] < targetMap[currentStr] {
-					isMatchCount -= 1
+			currentChar = s[left]
+			if _, isExist := targetMap[currentChar]; isExist {
+				countMap[currentChar] -= 1
+
+				if countMap[currentChar] < targetMap[currentChar] {
+					matchCharCount -= 1
 				}
 			}
-			
+
 			left += 1
+		}
+	}
+
+	return res
+	*/
+
+	// solution2: use array check equal
+	if len(s) < len(p) {
+		return []int{}
+	}
+
+	pCount := [26]int{}
+	sCount := [26]int{}
+
+	for idx := range p {
+		pCount[p[idx]-'a'] += 1
+		sCount[s[idx]-'a'] += 1
+	}
+
+	res := make([]int, 0, len(s))
+
+	if sCount == pCount {
+		res = append(res, 0)
+	}
+
+	for left, right := 0, len(p); right < len(s); right += 1 {
+		sCount[s[left]-'a'] -= 1
+		sCount[s[right]-'a'] += 1
+		left += 1
+
+		if sCount == pCount {
+			res = append(res, left)
 		}
 	}
 

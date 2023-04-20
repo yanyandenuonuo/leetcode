@@ -13,6 +13,14 @@
  * }
  */
 func mergeKLists(lists []*ListNode) *ListNode {
+	// solution1: 顺序合并
+	//			  依次将k个链表与合并后的链表进行合并mergeTwo
+	// solution2: 分治合并
+	//			  依次将k个链表中的两两合并，再对合并后的(k+1)/2个链表进行两两合并
+	// solution3: 利用小顶堆
+	//			  使用k个ListNode的第一个元素构成一个长度为k的小顶堆
+	//			  依次从堆顶取出元素并放入该元素Next元素
+	//			  再对堆进行排序
 	switch len(lists) {
 	case 0:
 		return nil
@@ -57,7 +65,7 @@ func mergeKLists(lists []*ListNode) *ListNode {
 		if lists[minListIdx].Next != nil {
 			lists[minListIdx] = lists[minListIdx].Next
 			sortIdx[0] = []int{lists[minListIdx].Val, minListIdx}
-			heapSort(sortIdx)
+			heapSort(sortIdx) // 这里其实走插值排序更快log(n)
 		} else {
 			sortIdx = sortIdx[1:]
 		}
@@ -67,7 +75,7 @@ func mergeKLists(lists []*ListNode) *ListNode {
 }
 
 func heapSort(nums [][]int) [][]int {
-	// 构建大顶堆
+	// 构建小顶堆
 	for idx := len(nums)/2 - 1; idx >= 0; idx -= 1 {
 		heapify(nums, idx, len(nums))
 	}

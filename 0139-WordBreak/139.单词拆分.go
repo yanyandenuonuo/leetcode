@@ -19,6 +19,11 @@ func wordBreak(s string, wordDict []string) bool {
 		if !dp[leftIdx] {
 			continue
 		}
+
+		if dp[len(s)] {
+			return true
+		}
+
 		for rightIdx := leftIdx; rightIdx < len(s); rightIdx += 1 {
 			if wordMap[s[leftIdx:rightIdx+1]] && dp[leftIdx] {
 				dp[rightIdx+1] = true
