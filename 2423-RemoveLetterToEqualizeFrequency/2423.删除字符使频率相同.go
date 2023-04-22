@@ -18,12 +18,31 @@ func equalFrequency(word string) bool {
 	frequencyMap := make(map[int]int, len(runeMap))
 	for _, frequency := range runeMap {
 		frequencyMap[frequency] += 1
+		if len(frequencyMap) > 2 {
+			return false
+		}
 	}
 
 	if len(frequencyMap) == 2 {
+		minFrequency := len(word)
+		maxFrequency := 0
+		minFrequencyCount := 0
+		maxFrequencyCount := 0
+		for frequency, frequencyCount := range frequencyMap {
+			if frequency < minFrequency {
+				minFrequency = frequency
+				minFrequencyCount = frequencyCount
+			}
+			if frequency > maxFrequency {
+				maxFrequency = frequency
+				maxFrequencyCount = frequencyCount
+			}
+		}
+
 		// one char show time more one than other char
 		// one char show time only one and others show same time
-		if len(word)%len(runeMap) == 1 || len(word)%(len(runeMap)-1) == 1 {
+		if (maxFrequency-minFrequency == 1 && maxFrequencyCount == 1) ||
+			(minFrequency == 1 && minFrequencyCount == 1) {
 			return true
 		}
 	} else if len(frequencyMap) == 1 {
