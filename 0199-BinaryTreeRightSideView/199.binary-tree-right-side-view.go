@@ -15,20 +15,20 @@
  *
  * Given a binary tree, imagine yourself standing on the right side of it,
  * return the values of the nodes you can see ordered from top to bottom.
- * 
+ *
  * Example:
- * 
- * 
+ *
+ *
  * Input: [1,2,3,null,5,null,4]
  * Output: [1, 3, 4]
  * Explanation:
- * 
+ *
  * ⁠  1            <---
  * ⁠/   \
  * 2     3         <---
  * ⁠\     \
  * ⁠ 5     4       <---
- * 
+ *
  */
 
 // @lc code=start
@@ -40,41 +40,30 @@
  *     Right *TreeNode
  * }
  */
- package leetcode
- 
 func rightSideView(root *TreeNode) []int {
 	if root == nil {
 		return []int{}
 	}
-	res := make([]int, 0, 32)
-	queueList := make([]*TreeNode, 0, 32)
-	queueList = append(queueList, root)
+	currentQueue := make([]*TreeNode, 0)
+	currentQueue = append(currentQueue, root)
+	res := make([]int, 0)
+	for len(currentQueue) > 0 {
+		res = append(res, currentQueue[len(currentQueue)-1].Val)
 
-	currentLen := 1
-	nexLen := 0
-	for idx := 0; idx < currentLen; idx += 1 {
-		if queueList[idx].Left != nil {
-			queueList = append(queueList, queueList[idx].Left)
-			nexLen += 1
-		}
-		if queueList[idx].Right != nil {
-			queueList = append(queueList, queueList[idx].Right)
-			nexLen += 1
-		}
+		nextQueue := make([]*TreeNode, 0, 2*len(currentQueue))
 
-		if currentLen-idx == 1 {
-			res = append(res, queueList[idx].Val)
-			queueList = queueList[currentLen:]
-			idx = -1
-			currentLen = nexLen
-			nexLen = 0
-			if currentLen == 0 {
-				break
+		for _, node := range currentQueue {
+			if node.Left != nil {
+				nextQueue = append(nextQueue, node.Left)
+			}
+			if node.Right != nil {
+				nextQueue = append(nextQueue, node.Right)
 			}
 		}
-
+		currentQueue = nextQueue
 	}
+
 	return res
 }
-// @lc code=end
 
+// @lc code=end

@@ -14,25 +14,25 @@
  * Testcase Example:  '[3,9,20,15,7]\n[9,3,15,20,7]'
  *
  * Given preorder and inorder traversal of a tree, construct the binary tree.
- * 
+ *
  * Note:
  * You may assume that duplicates do not exist in the tree.
- * 
+ *
  * For example, given
- * 
- * 
+ *
+ *
  * preorder = [3,9,20,15,7]
  * inorder = [9,3,15,20,7]
- * 
+ *
  * Return the following binary tree:
- * 
- * 
+ *
+ *
  * ⁠   3
  * ⁠  / \
  * ⁠ 9  20
  * ⁠   /  \
  * ⁠  15   7
- * 
+ *
  */
 
 // @lc code=start
@@ -45,23 +45,31 @@
  * }
  */
 func buildTree(preorder []int, inorder []int) *TreeNode {
+	// 前序遍历： [根节点], [左子树的前序遍历结果], [右子树的前序遍历结果]
+	// 中序遍历： [左子树的前序遍历结果], [根节点], [右子树的前序遍历结果]
 	if len(preorder) == 0 {
 		return nil
+	} else if len(preorder) == 1 {
+		return &TreeNode{
+			Val:   preorder[0],
+			Left:  nil,
+			Right: nil,
+		}
 	}
-	root := new(TreeNode)
-	root.Val = preorder[0]
 
 	idx := 0
-	for  {
-		if inorder[idx] == root.Val {
+	for ; idx < len(inorder); idx += 1 {
+		if inorder[idx] == preorder[0] {
 			break
 		}
-		idx += 1
 	}
-	root.Left = buildTree(preorder[1:idx+1], inorder[0:idx])
-	root.Right = buildTree(preorder[idx+1:], inorder[idx+1:])
 
-	return root
+	return &TreeNode{
+		Val:   preorder[0],
+		Left:  buildTree(preorder[1:idx+1], inorder[0:idx]),
+		Right: buildTree(preorder[idx+1:], inorder[idx+1:]),
+	}
 }
+
 // @lc code=end
 
