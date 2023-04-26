@@ -19,8 +19,63 @@ type NodeIdx struct {
 }
 
 func widthOfBinaryTree(root *TreeNode) int {
-	// solution1: 利用二叉树性质给节点编号，通过DFS找到每层最左边节点的编号以及最右边节点的编号，宽度即为最右边编号-最左边编号+1
-	// solution2: 利用二叉树性质给节点编号，通过BFS找到每层最左边节点的编号以及最右边节点的编号，宽度即为最右边编号-最左边编号+1
+	// solution1: 通过塞入空节点来计算宽度，会存在内存溢出的case
+	/**
+	if root == nil {
+		return 0
+	}
+	currentQueue := make([]*TreeNode, 0)
+	currentQueue = append(currentQueue, root)
+	maxWidth := 1
+
+	for len(currentQueue) > 0 {
+		if len(currentQueue) > maxWidth {
+			maxWidth = len(currentQueue)
+		}
+
+		nextQueue := make([]*TreeNode, 0)
+		for _, treeNode := range currentQueue {
+			if treeNode == nil {
+				nextQueue = append(nextQueue, nil)
+				nextQueue = append(nextQueue, nil)
+				continue
+			}
+
+			if treeNode.Left != nil {
+				nextQueue = append(nextQueue, treeNode.Left)
+			} else {
+				nextQueue = append(nextQueue, nil)
+			}
+
+			if treeNode.Right != nil {
+				nextQueue = append(nextQueue, treeNode.Right)
+			} else {
+				nextQueue = append(nextQueue, nil)
+			}
+		}
+		// 从左边找到第一个不为nil的节点
+		leftIdx := 0
+		for ; leftIdx < len(nextQueue); leftIdx += 1 {
+			if nextQueue[leftIdx] != nil {
+				break
+			}
+		}
+		if leftIdx == len(nextQueue) {
+			break
+		}
+		// 从左边找到第一个不为nil的节点
+		rightIdx := len(nextQueue) - 1
+		for ; rightIdx >= 0; rightIdx -= 1 {
+			if nextQueue[rightIdx] != nil {
+				break
+			}
+		}
+		currentQueue = nextQueue[leftIdx : rightIdx+1]
+	}
+	return maxWidth
+	*/
+	// solution2: 利用二叉树性质给节点编号，通过DFS找到每层最左边节点的编号以及最右边节点的编号，宽度即为最右边编号-最左边编号+1
+	// solution3: 利用二叉树性质给节点编号，通过BFS找到每层最左边节点的编号以及最右边节点的编号，宽度即为最右边编号-最左边编号+1
 	//			  因为中间的空节点也计入宽度，所以没法通过直接计算每层节点数的方式来计算宽度
 	if root == nil {
 		return 0
