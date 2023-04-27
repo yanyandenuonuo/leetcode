@@ -14,16 +14,18 @@
  * }
  */
 func mergeTrees(root1 *TreeNode, root2 *TreeNode) *TreeNode {
-	root := new(TreeNode)
-
-	// current node
 	if root1 == nil && root2 == nil {
 		return nil
-	} else if root1 != nil && root2 == nil {
+	}
+
+	root := new(TreeNode)
+
+	if root1 != nil && root2 == nil {
 		root.Val = root1.Val
 
 		// left node
 		root.Left = mergeTrees(root1.Left, nil)
+
 		// right node
 		root.Right = mergeTrees(root1.Right, nil)
 	} else if root1 == nil && root2 != nil {
@@ -31,6 +33,7 @@ func mergeTrees(root1 *TreeNode, root2 *TreeNode) *TreeNode {
 
 		// left node
 		root.Left = mergeTrees(nil, root2.Left)
+
 		// right node
 		root.Right = mergeTrees(nil, root2.Right)
 	} else {
@@ -38,6 +41,7 @@ func mergeTrees(root1 *TreeNode, root2 *TreeNode) *TreeNode {
 
 		// left node
 		root.Left = mergeTrees(root1.Left, root2.Left)
+
 		// right node
 		root.Right = mergeTrees(root1.Right, root2.Right)
 	}
