@@ -6,6 +6,8 @@
 
 // @lc code=start
 func countKDifference(nums []int, k int) int {
+	// solution1: 枚举
+	// solution2: hash表计数，然后再遍历nums并更新hash表中计数值
 	numMap := make(map[int]int, len(nums))
 	for _, val := range nums {
 		numMap[val] += 1

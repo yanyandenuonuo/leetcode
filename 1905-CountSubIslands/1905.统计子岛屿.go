@@ -6,22 +6,7 @@
 
 // @lc code=start
 func countSubIslands(grid1 [][]int, grid2 [][]int) int {
-
-	// [
-	// 	[1,1,1,0,0],
-	// 	[0,1,1,1,1],
-	// 	[0,0,0,0,0],
-	// 	[1,0,0,0,0],
-	// 	[1,1,0,1,1]
-	// ]
-
-	// [
-	// 	[1,1,1,0,0],
-	// 	[0,0,1,1,1],
-	// 	[0,1,0,0,0],
-	// 	[1,0,1,1,0],
-	// 	[0,1,0,1,0]
-	// ]
+	// solution: 逐个判断，判断过程中将岛屿清零避免重复判断
 
 	totalSubIsLand := 0
 	for row := range grid2 {
@@ -29,8 +14,8 @@ func countSubIslands(grid1 [][]int, grid2 [][]int) int {
 			if grid2[row][column] == 0 {
 				continue
 			}
-			if isSubIsLand(grid2, grid1, row, column) {
 
+			if isSubIsLand(grid2, grid1, row, column) {
 				totalSubIsLand += 1
 			}
 		}
