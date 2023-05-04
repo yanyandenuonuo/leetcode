@@ -15,60 +15,65 @@
  *
  * Return the lexicographically smallest subsequence of s that contains all the
  * distinct characters of s exactly once.
- * 
+ *
  * Note: This question is the same as 316:
  * https://leetcode.com/problems/remove-duplicate-letters/
- * 
- * 
+ *
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input: s = "bcabc"
  * Output: "abc"
- * 
- * 
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input: s = "cbacdcbc"
  * Output: "acdb"
- * 
- * 
- * 
+ *
+ *
+ *
  * Constraints:
- * 
- * 
+ *
+ *
  * 1 <= s.length <= 1000
  * s consists of lowercase English letters.
- * 
- * 
+ *
+ *
  */
 
 // @lc code=start
 func smallestSubsequence(s string) string {
-    countMap := make(map[string]int, len(s))
-	handleMap := make(map[string]bool, len(s))
-    for idx := 0; idx < len(s); idx += 1 {
-		countMap[s[idx:idx+1]] += 1
+	// solution: 贪心+单调栈
+	charCounter := [26]int{}
+	for _, runeChar := range s {
+		charCounter[runeChar-'a'] += 1
 	}
 
-	res := ""
-    for idx := 0; idx < len(s); idx += 1 {
-		val := s[idx:idx+1]
-		countMap[val] -= 1
-		if _, isHandle := handleMap[val]; isHandle {
-			continue
+	charStack := make([]rune, 0, len(s))
+	stackMem := [26]bool{}
+
+	for _, runeChar := range s {
+		// 已经在栈里就不再处理，直接更新字符计数即可
+		if !stackMem[runeChar-'a'] {
+			// 移除stack中存在重复且字典序靠后的字符
+			for len(charStack) > 0 && runeChar < charStack[len(charStack)-1] &&
+				charCounter[charStack[len(charStack)-1]-'a'] > 0 {
+				stackMem[charStack[len(charStack)-1]-'a'] = false
+				charStack = charStack[:len(charStack)-1]
+			}
+
+			charStack = append(charStack, runeChar)
+			stackMem[runeChar-'a'] = true
 		}
 
-		for len(res) > 0 && countMap[res[len(res)-1:]] > 0 && res[len(res)-1:] > val {
-			delete(handleMap, res[len(res)-1:])
-			res = res[:len(res)-1]
-		}
-
-		res += val
-		handleMap[val] = true
+		charCounter[runeChar-'a'] -= 1
 	}
-	return res
+
+	return string(charStack)
 }
+
 // @lc code=end
 

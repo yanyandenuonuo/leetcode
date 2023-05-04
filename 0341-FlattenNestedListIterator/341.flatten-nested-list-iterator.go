@@ -14,33 +14,33 @@
  * Testcase Example:  '[[1,1],2,[1,1]]'
  *
  * Given a nested list of integers, implement an iterator to flatten it.
- * 
+ *
  * Each element is either an integer, or a list -- whose elements may also be
  * integers or other lists.
- * 
+ *
  * Example 1:
- * 
- * 
- * 
+ *
+ *
+ *
  * Input: [[1,1],2,[1,1]]
  * Output: [1,1,2,1,1]
  * Explanation: By calling next repeatedly until hasNext returns
- * false, 
+ * false,
  * the order of elements returned by next should be: [1,1,2,1,1].
- * 
- * 
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input: [1,[4,[6]]]
  * Output: [1,4,6]
  * Explanation: By calling next repeatedly until hasNext returns
- * false, 
+ * false,
  * the order of elements returned by next should be: [1,4,6].
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
 
 // @lc code=start
@@ -70,24 +70,78 @@
  * func (this NestedInteger) GetList() []*NestedInteger {}
  */
 
+// solution1: 构造函数中遍历然后存放入slice，然后next更新slice
+/**
 type NestedIterator struct {
-	Val int
-	List []*NestedIterator
+	valList []int
 }
 
 func Constructor(nestedList []*NestedInteger) *NestedIterator {
-    return new([]*NestedInteger)
+	return &NestedIterator{
+		valList: converNestedListToIntList(nestedList),
+	}
+}
+
+func converNestedListToIntList(nestedList []*NestedInteger) []int {
+	resList := make([]int, 0)
+	for _, nestedInteger := range nestedList {
+		if nestedInteger.IsInteger() {
+			resList = append(resList, nestedInteger.GetInteger())
+		} else {
+			resList = append(resList, converNestedListToIntList(nestedInteger.GetList())...)
+		}
+	}
+	return resList
 }
 
 func (this *NestedIterator) Next() int {
-    
+	val := this.valList[0]
+	this.valList = this.valList[1:]
+	return val
 }
 
 func (this *NestedIterator) HasNext() bool {
-    if this == nil {
+	if len(this.valList) == 0 {
 		return false
 	}
 	return true
 }
+*/
+
+// solution2: 栈，直接保存nestedList，然后每次取栈顶元素的第一个元素，并将剩余元素放入栈顶
+type NestedIterator struct {
+	stack [][]*NestedInteger
+}
+
+func Constructor(nestedList []*NestedInteger) *NestedIterator {
+	return &NestedIterator{
+		stack: [][]*NestedInteger{nestedList},
+	}
+}
+
+func (this *NestedIterator) Next() int {
+	val := this.stack[len(this.stack)-1][0].GetInteger()
+	this.stack[len(this.stack)-1] = this.stack[len(this.stack)-1][1:]
+	return val
+}
+
+func (this *NestedIterator) HasNext() bool {
+	for len(this.stack) > 0 {
+		topNestedList := this.stack[len(this.stack)-1]
+		if len(topNestedList) == 0 {
+			this.stack = this.stack[:len(this.stack)-1]
+			continue
+		}
+
+		topNestedIterator := topNestedList[0]
+		if topNestedIterator.IsInteger() {
+			return true
+		}
+		this.stack[len(this.stack)-1] = this.stack[len(this.stack)-1][1:]
+		this.stack = append(this.stack, topNestedIterator.GetList())
+	}
+	return false
+}
+
 // @lc code=end
 
