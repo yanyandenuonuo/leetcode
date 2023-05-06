@@ -15,11 +15,10 @@ func groupAnagrams(strs []string) [][]string {
 		for _, char := range str {
 			bitChar[char-'a'] += 1
 		}
-		if _, isExist := bitCharMap[bitChar]; !isExist {
-			bitCharMap[bitChar] = make([]string, 0)
-		}
+
 		bitCharMap[bitChar] = append(bitCharMap[bitChar], str)
 	}
+
 	res := make([][]string, 0, len(bitCharMap))
 	for _, strList := range bitCharMap {
 		res = append(res, strList)

@@ -6,7 +6,9 @@
 
 // @lc code=start
 func numberToWords(num int) string {
-
+	// solution1: 递归
+	// solution2: 迭代
 }
+
 // @lc code=end
 
