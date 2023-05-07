@@ -33,10 +33,12 @@ func calculate(s string) int {
 			}
 		}
 	}
+
 	res := 0
 	for idx := len(numStack) - 1; idx >= 0; idx -= 1 {
 		res += numStack[idx]
 	}
+
 	return res
 }
 

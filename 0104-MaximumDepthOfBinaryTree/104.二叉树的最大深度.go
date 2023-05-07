@@ -14,11 +14,14 @@
  * }
  */
 func maxDepth(root *TreeNode) int {
+	// solution1: DFS
 	if root == nil {
 		return 0
 	}
 	maxHeight := treeHeight(root)
 	return maxHeight
+
+	// solution2: BFS
 }
 
 func treeHeight(root *TreeNode) int {

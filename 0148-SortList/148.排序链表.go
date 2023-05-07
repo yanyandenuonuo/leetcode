@@ -19,6 +19,7 @@ func sortList(head *ListNode) *ListNode {
 	if head == nil {
 		return nil
 	}
+
 	if head.Next == nil {
 		return head
 	}
@@ -48,9 +49,11 @@ func sortList(head *ListNode) *ListNode {
 	if head == nil {
 		return nil
 	}
+
 	if head.Next == nil {
 		return head
 	}
+
 	listLength := 0
 	for scanNode := head; scanNode != nil; scanNode = scanNode.Next {
 		listLength += 1
@@ -100,6 +103,7 @@ func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 			scanNode.Next = list2
 			break
 		}
+
 		if list1 != nil && list2 == nil {
 			scanNode.Next = list1
 			break
@@ -115,6 +119,7 @@ func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 			list2 = list2.Next
 		}
 	}
+
 	return headNode.Next
 }
 
