@@ -6,8 +6,8 @@
 
 // @lc code=start
 func maxArea(height []int) int {
-	maxRes := 0
-	leftIdx, rightIdx := 0, len(height)-1
+	// solution: 双指针
+	maxRes, leftIdx, rightIdx := 0, 0, len(height)-1
 
 	for leftIdx < rightIdx {
 		res := 0
@@ -18,6 +18,7 @@ func maxArea(height []int) int {
 			res = (rightIdx - leftIdx) * height[rightIdx]
 			rightIdx -= 1
 		}
+
 		if res > maxRes {
 			maxRes = res
 		}
