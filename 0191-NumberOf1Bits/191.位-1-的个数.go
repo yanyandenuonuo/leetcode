@@ -13,6 +13,7 @@ func hammingWeight(num uint32) int {
 		bitCount += int(num & 0x01)
 		num >>= 1
 	}
+
 	return bitCount
 	*/
 
@@ -23,8 +24,8 @@ func hammingWeight(num uint32) int {
 		bitCount += 1
 
 	}
-	return bitCount
 
+	return bitCount
 }
 
 // @lc code=end

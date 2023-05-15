@@ -14,6 +14,7 @@
  * }
  */
 func pathSum(root *TreeNode, targetSum int) [][]int {
+	// solution: DFS
 	if root == nil {
 		return [][]int{}
 	}
@@ -45,7 +46,9 @@ func pathSum(root *TreeNode, targetSum int) [][]int {
 		hasPathSum(rootNode.Right, targetNum-rootNode.Val)
 		pathList = pathList[:len(pathList)-1]
 	}
+
 	hasPathSum(root, targetSum)
+
 	return resList
 }
 
