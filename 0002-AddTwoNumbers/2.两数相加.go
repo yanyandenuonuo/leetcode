@@ -13,6 +13,7 @@
  * }
  */
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	// solution: 模拟
 	point1 := l1
 	point2 := l2
 	pointSum := new(ListNode)

@@ -55,7 +55,7 @@ func maximalSquare(matrix [][]byte) int {
 
 	// solution2: 动态规划
 	//			  matrix[rowIdx][columnIdx] == 0, dp[rowIdx][columnIdx] = 0
-	//			  matrix[rowIdx][columnIdx] == 1, dp[rowIdx][columnIdx] = min(dp)
+	//			  matrix[rowIdx][columnIdx] == 1, dp[rowIdx][columnIdx] = min(dp[rowIdx-1][columnIdx-1], dp[rowIdx-1][columnIdx], dp[rowIdx][columnIdx-1])
 	dp := make([][]int, len(matrix))
 	for rowIdx := 0; rowIdx < len(matrix); rowIdx += 1 {
 		dp[rowIdx] = make([]int, len(matrix[rowIdx]))

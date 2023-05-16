@@ -6,6 +6,8 @@
 
 // @lc code=start
 func findKthLargest(nums []int, k int) int {
+	// solution1: 堆排序
+	// solution2: 快排
 	k = len(nums) - k
 	nums = quickSort(nums, 0, len(nums), k)
 	return nums[k]

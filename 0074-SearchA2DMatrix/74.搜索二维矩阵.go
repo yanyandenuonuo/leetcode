@@ -6,6 +6,7 @@
 
 // @lc code=start
 func searchMatrix(matrix [][]int, target int) bool {
+	// solution: 先用二分查找row，再用二分查找column
 	for rowKey, columnItem := range matrix {
 		if matrix[rowKey][0] > target {
 			return false
