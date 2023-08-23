@@ -13,18 +13,14 @@
  * }
  */
 func middleNode(head *ListNode) *ListNode {
-	slowNode := head
-	fastNode := head
-	for {
-		if fastNode == nil || fastNode.Next == nil {
-			return slowNode
-		}
-		slowNode = slowNode.Next
-		fastNode = fastNode.Next
-		if fastNode != nil {
-			fastNode = fastNode.Next
-		}
+	// solution: 快慢指针
+	slowIdx := head
+	for fastIdx := head; fastIdx != nil && fastIdx.Next != nil; {
+		slowIdx = slowIdx.Next
+		fastIdx = fastIdx.Next.Next
 	}
+
+	return slowIdx
 }
 
 // @lc code=end
