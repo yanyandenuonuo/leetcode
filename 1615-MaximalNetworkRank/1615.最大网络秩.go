@@ -33,8 +33,8 @@ func maximalNetworkRank(n int, roads [][]int) int {
 		cityCount[cityB] += 1
 		cityConnect[cityA][cityB] = 1
 		cityConnect[cityB][cityA] = 1
-
 	}
+
 	res := 0
 	// n个城市可能有些城市不存在道路，所以这里不能使用n，需要使用cityList
 	for cityAIdx := 0; cityAIdx < len(cityList); cityAIdx += 1 {
@@ -48,6 +48,7 @@ func maximalNetworkRank(n int, roads [][]int) int {
 			}
 		}
 	}
+
 	return res
 }
 

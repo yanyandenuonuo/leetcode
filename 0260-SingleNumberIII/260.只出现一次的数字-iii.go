@@ -14,8 +14,15 @@ func singleNumber(nums []int) []int {
 	for _, num := range nums {
 		z ^= num
 	}
+
 	x, y := 0, 0
-	bitZ := z & -z // 获取最低位的1
+
+	bitZ := z // 获取最低位的1
+	if z != -1<<31 {
+		// 防止溢出
+		bitZ = z & -z
+	}
+
 	for _, num := range nums {
 		if num&bitZ == bitZ {
 			x ^= num
@@ -23,6 +30,9 @@ func singleNumber(nums []int) []int {
 			y ^= num
 		}
 	}
+
+	// return []int{x, x^z}
+
 	return []int{x, y}
 }
 

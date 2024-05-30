@@ -18,53 +18,51 @@ func reorderList(head *ListNode) {
 	if head == nil || head.Next == nil {
 		return
 	}
-	preMidPoint, slowPoint := head, head
-	for fastPoint := head; fastPoint != nil; fastPoint = fastPoint.Next {
-		preMidPoint = slowPoint
-		slowPoint = slowPoint.Next
-		fastPoint = fastPoint.Next
-		if fastPoint == nil {
-			break
-		}
-	}
-	preMidPoint.Next = nil
-	list2 := reverseList(slowPoint)
 
-	res := new(ListNode)
+	// 找出链表中点
+	slowNode := head
+	for fastNode := head; fastNode != nil && fastNode.Next != nil; {
+		slowNode = slowNode.Next
+		fastNode = fastNode.Next.Next
+	}
+
+	middelNode := slowNode.Next
+	slowNode.Next = nil
+
+	rightNode := reverseList(middelNode)
+
 	// 依次合并两个链表
 	// 1 2 3
 	// 5 4
-	for list1Node, list2Node, tailNode := head, list2, res; list1Node != nil || list2Node != nil; {
-		tailNode.Next = list1Node
-		tailNode = tailNode.Next
+	for leftNode := head; leftNode != nil && rightNode != nil; {
+		leftNextNode := leftNode.Next
+		rightNextNode := rightNode.Next
 
-		list1Node = list1Node.Next
+		leftNode.Next = rightNode
+		leftNode = leftNextNode
 
-		if list2Node == nil {
-			break
-		}
-
-		tailNode.Next = list2Node
-		tailNode = tailNode.Next
-
-		list2Node = list2Node.Next
+		rightNode.Next = leftNode
+		rightNode = rightNextNode
 	}
-	head = res.Next
 }
 
 func reverseList(head *ListNode) *ListNode {
 	if head == nil {
 		return nil
 	}
-	var newHead *ListNode
-	for scanNode := head; scanNode != nil; {
-		currentScanNode := scanNode
-		scanNode = scanNode.Next
 
-		currentScanNode.Next = newHead
-		newHead = currentScanNode
+	var prevNode *ListNode
+	for scanNode := head; scanNode != nil; {
+		nextScanNode := scanNode.Next
+
+		scanNode.Next = prevNode
+
+		prevNode = scanNode
+
+		scanNode = nextScanNode
 	}
-	return newHead
+
+	return prevNode
 }
 
 // @lc code=end
